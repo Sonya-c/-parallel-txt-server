@@ -11,14 +11,19 @@ let io = require('socket.io')(server, {
 
 const PORT = 8080;
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+})
+
 server.listen(PORT, () => {
     console.log(`listening on *:${PORT}`);
 });
 
 io.on('connection', (socket) => {
-    console.log('new client connected');
+    socket.emit('connection', null);
     
-    socket.on('new_message', (data) => {
-        io.emit('new_message', data)
-    })
+    socket.on('send-message', message => {
+        io.emit('message', message);
+    });
 });
