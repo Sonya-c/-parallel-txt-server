@@ -4,8 +4,9 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 8080;
 
-const origin = "https://parallel-txt.herokuapp.com ";
+let origin;
 if (PORT == 8080) origin = "http://localhost:3000";
+else origin = "https://parallel-txt.herokuapp.com";
 
 let io = require('socket.io')(server, {
     cors: {
