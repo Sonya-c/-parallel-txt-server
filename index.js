@@ -2,14 +2,17 @@ const app = require('express')();
 const http = require('http');
 const server = http.createServer(app);
 
+const PORT = process.env.PORT || 8080;
+
+const origin = "https://parallel-txt.herokuapp.com ";
+if (PORT == 8080) origin = "http://localhost:3000";
+
 let io = require('socket.io')(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: origin,
         methods: ["GET", "POST"]
     }
 });
-
-const PORT = 8080;
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
