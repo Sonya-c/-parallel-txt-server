@@ -20,7 +20,7 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', (socket) => {
-    console.log("Conexion establecida",socket.id);
+    console.log("Conexión establecida",socket.id);
     socket.on('login', ({ name, room }, callback) => {
         const { user, error } = addUser(socket.id, name, room)
         if (error) return callback(error)
